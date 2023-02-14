@@ -1,1 +1,61 @@
-<h1>rxb3rth</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rxb3rth</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const canvas = document.createElement("canvas");
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext("2d");
+      const dpi = window.devicePixelRatio || 1;
+      const width = canvas.clientWidth * dpi;
+      const height = canvas.clientHeight * dpi;
+      canvas.width = width;
+      canvas.height = height;
+
+      let x = width / 2;
+      let y = height / 2;
+      let dx = 2;
+      let dy = 2;
+      const text = "rxb3rth";
+
+      function draw() {
+        const isDarkMode =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const bgColor = isDarkMode ? "black" : "white";
+        const textColor = isDarkMode ? "white" : "black";
+
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = textColor;
+        ctx.font = `${50 * dpi}px sans-serif`;
+        const textWidth = ctx.measureText(text).width;
+        ctx.fillText(text, x, y);
+        if (x + dx > width - textWidth || x + dx < 0) {
+          dx = -dx;
+        }
+        if (y + dy > height || y + dy < 0) {
+          dy = -dy;
+        }
+        x += dx;
+        y += dy;
+      }
+
+      setInterval(draw, 10);
+    </script>
+  </body>
+</html>
