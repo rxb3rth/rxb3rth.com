@@ -14,8 +14,8 @@
   <body>
     <script>
       const canvas = document.createElement("canvas");
-      canvas.style.width = "100%";
-      canvas.style.height = "100%";
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
       document.body.appendChild(canvas);
 
       const ctx = canvas.getContext("2d");
